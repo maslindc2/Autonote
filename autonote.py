@@ -1,5 +1,6 @@
 import sys
 import os
+import glob
 
 
 python = ".py"
@@ -38,6 +39,15 @@ def openFile(fileName):
     
     os.system("nano " + fileName)   
 
+def lazyOpen(folderName):
+    
+    os.chdir(folderName)
+    filelist = os.listdir(os.getcwd())
+    filelist = filter(lambda x: not os.path.isdir(x), filelist)
+    newest = max(filelist, key=lambda x: os.stat(x).st_mtime)
+    
+    os.system("nano " + newest)
+    
 
 def createFile(folderName, fileName, extension):
     
@@ -63,4 +73,9 @@ def createFile(folderName, fileName, extension):
 
 
 if __name__ == "__main__":
-    checkFileAndFolder()
+    
+    if(len(sys.argv) == 4):
+        checkFileAndFolder()
+    elif (len(sys.argv) == 2):
+        lazyOpen(sys.argv[1])
+    
