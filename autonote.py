@@ -17,18 +17,30 @@ extensions = {
 }
 
 def checkFileAndFolder():
-    folderName = str(sys.argv[1])
-    fileName = str(sys.argv[2]) + str(sys.argv[3])
-    if(os.path.isdir(folderName)):
-        #os.mkdir(folderName)
-        os.chdir(folderName)
-        if not (os.path.isfile(fileName)):
-            createFile()
-   
-def createFile():
+
     extension = str(sys.argv[3])
-    fileName = str(sys.argv[2])
+    fileName = str(sys.argv[2]) + str(sys.argv[3])
     folderName = str(sys.argv[1])
+    
+    if not (os.path.isdir(folderName)):
+        
+        #Create the directory and change to it using specified folder name
+        os.mkdir(folderName)
+        os.chdir(folderName)
+        createFile(folderName, fileName, extension)
+        
+    else:
+        os.chdir(folderName)
+        openFile(fileName)
+        
+
+def openFile(fileName):
+    
+    os.system("nano " + fileName)   
+
+
+def createFile(folderName, fileName, extension):
+    
 
     # Checks to see if the specified file type is in our dictionary of extensions
     # If it isn't then let the user know and default it to a txt file
@@ -41,9 +53,6 @@ def createFile():
 
         #Prints out specified usage TODO delete this line in final version
         print(sys.argv)
-
-    
-    fileName += extension
 
     open(fileName, "a").close()
 
