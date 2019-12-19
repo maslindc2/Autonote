@@ -1,5 +1,8 @@
 # Autonote
 *Python note automation, to make note taking less painful*
+
+![Autonote logo](https://raw.githubusercontent.com/maslindc2/Autonote/master/Logo.png)
+
 ## What is this
 This is a simple python and shell script used to automatically create a new folder and text document. Once the folder and file has been created, it will then open the file in your text editor of choice.
 
